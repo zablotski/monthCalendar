@@ -45,6 +45,7 @@ ul.event-list {
 .actions-list {
   visibility: hidden;
   display: flex;
+  justify-self: end;
 }
 
 .event-item:hover .actions-list {

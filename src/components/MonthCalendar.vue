@@ -4,11 +4,16 @@ import AddEventModal from "@/components/AddEventModal.vue";
 import EditEventModal from "@/components/EditEventModal.vue";
 import { randomString } from "@/components/uuid";
 import EventList from "@/components/EventList.vue";
+import {
+  getCalendarEvents,
+  saveCalendarEvents,
+} from "@/components/calendarService";
 
 export default {
   components: { EventList, EditEventModal, AddEventModal },
   data() {
     return {
+      inputDate: null,
       date: null,
       calendarData: [],
       showAddModal: false,
@@ -18,16 +23,26 @@ export default {
       selectedEvent: null,
     };
   },
-  computed: {},
-  created() {
-    this.date = new Date();
+  watch: {
+    inputDate(newDate) {
+      this.date = new Date(newDate);
 
-    const calendarDates = getCalendarDates(
-      this.date.getFullYear(),
-      this.date.getMonth()
-    );
+      this.calendarData.length && saveCalendarEvents(this.calendarData);
 
-    this.mapDatesToData(calendarDates);
+      const calendarDates = getCalendarDates(
+        +newDate.split("-")[0],
+        newDate.split("-")[1] - 1
+      );
+
+      this.calendarData = getCalendarEvents(calendarDates);
+    },
+  },
+  mounted() {
+    const date = new Date();
+    this.inputDate = `${date.getFullYear()}-${(
+      "0" +
+      (date.getMonth() + 1)
+    ).slice(-2)}`;
   },
   methods: {
     onDayClick(day) {
@@ -53,12 +68,6 @@ export default {
     deleteEvent(day, event) {
       day.events = day.events.filter((e) => e !== event);
     },
-    mapDatesToData: function (calendarDates) {
-      this.calendarData = calendarDates.map((date) => ({
-        dateObject: date,
-        events: [],
-      }));
-    },
   },
 };
 </script>
@@ -67,8 +76,13 @@ export default {
   <div class="calendar">
     <header>
       <h1>
-        {{ this.date.toLocaleString("default", { month: "long" }) }}
-        {{ this.date.getFullYear() }}
+        <input
+          ref="monthInput"
+          type="month"
+          id="monthInput"
+          name="monthInput"
+          v-model="inputDate"
+        />
       </h1>
     </header>
 
@@ -125,9 +139,6 @@ header {
   align-items: center;
   justify-content: center;
   margin-bottom: 1em;
-  background: #000;
-  color: #fff;
-  min-height: 5vh;
   text-align: center;
 }
 
