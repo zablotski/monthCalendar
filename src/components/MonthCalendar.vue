@@ -1,13 +1,13 @@
 <script>
-import { getCalendarDates } from "@/components/dateUtil";
-import AddEventModal from "@/components/AddEventModal.vue";
-import EditEventModal from "@/components/EditEventModal.vue";
-import { randomString } from "@/components/uuid";
+import { getCalendarDates } from "@/services/dateUtil";
+import AddEventModal from "@/components/modals/AddEventModal.vue";
+import EditEventModal from "@/components/modals/EditEventModal.vue";
+import { randomString } from "@/services/uuid";
 import EventList from "@/components/EventList.vue";
 import {
   getCalendarEvents,
   saveCalendarEvents,
-} from "@/components/calendarService";
+} from "@/services/calendarService";
 
 export default {
   components: { EventList, EditEventModal, AddEventModal },

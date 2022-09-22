@@ -10,7 +10,7 @@
   </EventModal>
 </template>
 <script>
-import EventModal from "@/components/EventModal.vue";
+import EventModal from "@/components/modals/EventModal.vue";
 
 export default {
   name: "AddEventModal",

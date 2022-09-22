@@ -33,23 +33,23 @@ ul.event-list {
 }
 
 .event-item {
-  font-size: 1rem;
+  font-size: 0.75rem;
   list-style: none;
   background-color: #fff;
   border: 1px solid lightgrey;
   padding: 0.125rem;
   display: grid;
   grid-template-columns: repeat(2, auto);
+  height: 1.25rem;
 }
 
 .actions-list {
-  visibility: hidden;
-  display: flex;
+  display: none;
   justify-self: end;
 }
 
 .event-item:hover .actions-list {
-  visibility: visible;
+  display: flex;
 }
 
 .actions-list > * {
@@ -60,5 +60,6 @@ ul.event-list {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  line-height: 1.25rem;
 }
 </style>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getCalendarDates } from "@/components/dateUtil";
+import { getCalendarDates } from "@/services/dateUtil";
 
 describe("dateUtils: ", () => {
   it("should return calendar data", () => {
