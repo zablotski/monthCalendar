@@ -1,5 +1,5 @@
 <script>
-import { getCalendarDates } from "@/services/dateUtil";
+import { getCalendarDates } from "@zablotski/dates-for-calendar";
 import AddEventModal from "@/components/modals/AddEventModal.vue";
 import EditEventModal from "@/components/modals/EditEventModal.vue";
 import { randomString } from "@/services/uuid";
